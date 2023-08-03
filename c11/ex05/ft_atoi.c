@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 16:11:57 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/07/31 16:11:59 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2023/07/31 01:36:43 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2023/07/31 01:36:45 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
-{
-	char	*temp;
-	int		ordered;
-	int		i;
+#include "./ft_atoi.h"
 
-	ordered = 1;
-	while (ordered)
+int	ft_atoi(char *str)
+{
+	int	integer;
+	int	sign;
+
+	integer = 0;
+	sign = 1;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		i = 1;
-		ordered = 0;
-		while (tab[i])
-		{
-			if (cmp(tab[i - 1], tab[i]) > 0)
-			{
-				temp = tab[i - 1];
-				tab[i - 1] = tab[i];
-				tab[i] = temp;
-				ordered = 1;
-			}
-			i++;
-		}
+		if (*str == '-')
+			sign *= -1;
+		str++;
 	}
+	while (*str >= '0' && *str <= '9')
+	{
+		integer = integer * 10 + *str - 48;
+		str++;
+	}
+	return (integer * sign);
 }

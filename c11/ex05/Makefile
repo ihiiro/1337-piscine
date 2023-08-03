@@ -1,19 +1,19 @@
-SRCS = srcs/
-INCLUDES = ./
-CFILES = srcs/ft_atoi.c srcs/ft_putnbr.c srcs/ops.c srcs/resolve_op_to_index.c srcs/valid.c srcs/check_mod_div_by_0.c srcs/main.c
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-OFILES =  srcs/ft_atoi.o srcs/ft_putnbr.o srcs/ops.o srcs/resolve_op_to_index.o srcs/valid.o srcs/check_mod_div_by_0.o srcs/main.o
 EXEC = do-op
+CFILES = ft_atoi.c ft_putnbr.c ops.c resolve_op_to_index.c valid.c check_mod_div_by_0.c main.c
+OFILES =  ${CFILES:.c=.o}
+HEADERS = ft_atoi.h ft_putnbr.h ops.h resolve_op_to_index.h valid.h check_mod_div_by_0.h
+
+.PHONY: all clean fclean re
 
 all: ${EXEC}
 
 ${EXEC}: ${OFILES}
-	@${CC} ${CFLAGS} ${OFILES} -o ${EXEC}
+	@${CC} ${CFLAGS} -o ${EXEC} ${OFILES}
 
-srcs/%.o: srcs/%.c
-	@${CC} ${CFLAGS} -c -I ${INCLUDES} $< -o $@
+%.o: %.c ${HEADERS}
+	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	@rm -f ${OFILES}

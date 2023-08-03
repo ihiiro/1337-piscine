@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 16:11:57 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/07/31 16:11:59 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2023/07/31 01:22:49 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2023/07/31 01:22:52 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
-{
-	char	*temp;
-	int		ordered;
-	int		i;
+#include "./ft_putnbr.h"
+#include <unistd.h>
 
-	ordered = 1;
-	while (ordered)
+void	ft_putnbr(int nb)
+{
+	char	c;
+
+	c = nb + 48;
+	if (nb == -2147483648)
+		write(1, "-2147483648", 11);
+	else if (nb < 0)
 	{
-		i = 1;
-		ordered = 0;
-		while (tab[i])
-		{
-			if (cmp(tab[i - 1], tab[i]) > 0)
-			{
-				temp = tab[i - 1];
-				tab[i - 1] = tab[i];
-				tab[i] = temp;
-				ordered = 1;
-			}
-			i++;
-		}
+		write(1, "-", 1);
+		ft_putnbr(-nb);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+	{
+		write(1, &c, 1);
 	}
 }

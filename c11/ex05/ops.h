@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
+/*   ops.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 16:11:57 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2023/07/31 16:11:59 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2023/08/01 18:05:24 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2023/08/01 18:05:26 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
-{
-	char	*temp;
-	int		ordered;
-	int		i;
+#ifndef OPS_H
+# define OPS_H
 
-	ordered = 1;
-	while (ordered)
-	{
-		i = 1;
-		ordered = 0;
-		while (tab[i])
-		{
-			if (cmp(tab[i - 1], tab[i]) > 0)
-			{
-				temp = tab[i - 1];
-				tab[i - 1] = tab[i];
-				tab[i] = temp;
-				ordered = 1;
-			}
-			i++;
-		}
-	}
-}
+int		add(int a, int b);
+int		subtract(int a, int b);
+int		divide(int a, int b);
+int		multiply(int a, int b);
+int		ft_remainder(int a, int b);
+
+#endif
