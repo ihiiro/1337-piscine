@@ -12,28 +12,19 @@
 
 #include <unistd.h>
 
-char	*hex_chars;
-
-hex_chars = "0123456789abcdef";
-char	c = '0';
-int	uppernibble;
-int	lowernibble;
-int	i = 0;
-
-void ft_putstr_non_printable(char *str)
+void	ft_putstr_non_printable(char *str)
 {
-	while (c >= 'f')
-	{
-		hex_chars[i] = c;
-		c++;
-		i++;
-	}
+	char	*hex_chars;
+	int		uppernibble;
+	int		lowernibble;
+
+	hex_chars = "0123456789abcdef";
 	while (*str)
 	{
-		if ((*str >= 0 && *str <= 31))
+		if (*str <= 31 || *str >= 127)
 		{
-			uppernibble = (*str >> 4) & 0x0f;
-			lowernibble = *str & 0x0f;
+			uppernibble = ((unsigned char)*str >> 4) & 0x0f;
+			lowernibble = (unsigned char)*str & 0x0f;
 			write(1, "\\", 1);
 			write(1, &hex_chars[uppernibble], 1);
 			write(1, &hex_chars[lowernibble], 1);
@@ -43,19 +34,3 @@ void ft_putstr_non_printable(char *str)
 		str++;
 	}
 }
-
-\n = 10
-
-uppernibble = (10 >> 4) & 0x0f
-
-00000000
-&
-00001111
-
-un = 00000000
-
-00001010
-&
-00001111
-
-00001010
